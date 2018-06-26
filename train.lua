@@ -25,7 +25,7 @@ cmd:option('-share_params',1, [[Share parameters between the two sentence encode
 cmd:option('-dropout', 0.2, [[Dropout probability.]])   
 
 -- optimization
-cmd:option('-epochs', 100, [[Number of training epochs]])
+cmd:option('-epochs', 300, [[Number of training epochs]])
 cmd:option('-param_init', 0.01, [[Parameters are initialized over uniform distribution with support
                                (-param_init, param_init)]])
 cmd:option('-optim', 'adagrad', [[Optimization method. Possible options are: 

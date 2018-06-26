@@ -90,13 +90,14 @@ def get_data(args):
     def make_vocab(srcfile, targetfile, labelfile, seqlength):
         num_sents = 0
         for _, (src_orig, targ_orig, label_orig) in \
-                enumerate(itertools.izip(open(srcfile,'r'),
+                enumerate(zip(open(srcfile,'r'),
                                          open(targetfile,'r'), open(labelfile, 'r'))):
             src_orig = word_indexer.clean(src_orig.strip())
             targ_orig = word_indexer.clean(targ_orig.strip())                
             targ = targ_orig.strip().split()
             src = src_orig.strip().split()
             label = label_orig.strip().split()
+            # print(label)
             if len(targ) > seqlength or len(src) > seqlength or len(targ) < 1 or len(src) < 1:
                 continue
             num_sents += 1
@@ -126,7 +127,7 @@ def get_data(args):
         dropped = 0
         sent_id = 0
         for _, (src_orig, targ_orig, label_orig) in \
-                enumerate(itertools.izip(open(srcfile,'r'), open(targetfile,'r')
+                enumerate(zip(open(srcfile,'r'), open(targetfile,'r')
                                          ,open(labelfile,'r'))):
             src_orig = word_indexer.clean(src_orig.strip())
             targ_orig = word_indexer.clean(targ_orig.strip())
@@ -149,7 +150,10 @@ def get_data(args):
             target_lengths[sent_id] = (targets[sent_id] != 1).sum()
             sources[sent_id] = np.array(src, dtype=int)
             source_lengths[sent_id] = (sources[sent_id] != 1).sum()            
+            #print(label[0])
             labels[sent_id] = label_indexer.d[label[0]]
+            #print(labels[sent_id])
+            #exit(0)
             both_lengths[sent_id] = (source_lengths[sent_id], target_lengths[sent_id])
             sent_id += 1
             if sent_id % 100000 == 0:
